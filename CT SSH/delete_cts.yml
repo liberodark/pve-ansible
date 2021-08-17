@@ -1,0 +1,31 @@
+- name: Stop and delete CT
+  hosts: proxmox
+  vars_files:
+    - config.yml
+    - cts.yml
+  tasks:
+    - name: Stop container for PVE
+      community.general.proxmox:
+        vmid: "{{ item.value.vmid }}"
+        node: "{{ node }}"
+        api_user: "{{ api_user }}"
+        api_password: "{{ api_password }}"
+        api_host: "{{ api_host }}"
+        proxmox_default_behavior: "{{ proxmox_default_behavior }}"
+        state: stopped
+      loop: "{{ lookup('dict', cts) }}"
+      tags:
+      - stop
+
+    - name: Delete container for PVE
+      community.general.proxmox:
+        vmid: "{{ item.value.vmid }}"
+        node: "{{ node }}"
+        api_user: "{{ api_user }}"
+        api_password: "{{ api_password }}"
+        api_host: "{{ api_host }}"
+        proxmox_default_behavior: "{{ proxmox_default_behavior }}"
+        state: absent
+      loop: "{{ lookup('dict', cts) }}"
+      tags:
+      - delete

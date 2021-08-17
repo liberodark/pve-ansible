@@ -1,0 +1,5 @@
+node: my_node
+api_user: user@realm
+api_password: my_pwd
+api_host: my_host
+proxmox_default_behavior: no_defaults

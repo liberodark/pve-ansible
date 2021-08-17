@@ -1,0 +1,55 @@
+- name: Initial setup VM
+  hosts: localhost
+  vars_files:
+    - config.yml
+    - vms.yml
+  tasks:
+    - name: Clone VMs
+      community.general.proxmox_kvm:
+        node: "{{ node }}"
+        name: "{{ item.value.name }}"
+        newid: "{{ item.value.vmid }}"
+        api_user: "{{ api_user }}"
+        api_password: "{{ api_password }}"
+        api_host: "{{ api_host }}"
+        clone: "{{ clone_vm }}"
+        full: no
+        format: unspecified
+        timeout: 300
+      loop: "{{ lookup('dict', vms) }}"
+      tags:
+      - create
+
+    - name: Update VMs
+      community.general.proxmox_kvm:
+        api_host:     "{{ api_host }}"
+        api_user:     "{{ api_user }}"
+        api_password: "{{ api_password }}"
+        cores:        "{{ item.value.cores }}"
+        sockets:      "{{ item.value.sockets }}"
+        memory:       "{{ item.value.memory }}"
+        update:       yes
+        vmid:         "{{ item.value.vmid }}"
+        node:         "{{ node }}"
+        name:         "{{ item.value.name }}"
+        boot: "dc"
+        bootdisk: scsi0
+        net:
+          net0:       "virtio,bridge=vmbr1,tag=960"
+        ipconfig:
+          ipconfig0:  "ip={{ item.value.ipaddress}},gw={{ item.value.gw }}"
+      loop: "{{ lookup('dict', vms) }}"
+      tags:
+      - update
+
+    - name: Start VMs
+      community.general.proxmox_kvm:
+        api_host:     "{{ api_host }}"
+        api_password: "{{ api_password }}"
+        api_user:     "{{ api_user }}"
+        vmid:         "{{ item.value.vmid }}"
+        node:         "{{ node }}"
+        state:        started
+      loop: "{{ lookup('dict', vms) }}"
+      tags:
+      - start

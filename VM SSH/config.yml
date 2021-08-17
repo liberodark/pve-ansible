@@ -1,0 +1,5 @@
+api_host: proxmox-server
+api_user: proxmox-user@REALM
+api_password: proxmox-pass
+clone_vm: template-centos7
+proxmox_default_behavior: compatibility

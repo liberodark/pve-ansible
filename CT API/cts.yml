@@ -1,0 +1,33 @@
+cts:
+  master:
+    hostname: primary.example.com
+    password: linux
+    vmid: 200
+    cores: 2
+    memory: 512
+    swap: 512
+    disk: 8
+    storage: storage
+    unprivileged: no
+    description: Container with Ansible
+    ostemplate: 'local:vztmpl/debian-10-standard_10.7-1_amd64.tar.gz'
+    onboot: no
+    netif: '{"net0":"name=eth0,gw=192.168.0.1,ip=192.168.0.2/24,bridge=vmbr0"}'
+    features:
+         - nesting=1
+  slave:
+    hostname: secondary.example.com
+    password: linux
+    vmid: 201
+    cores: 2
+    memory: 512
+    swap: 512
+    disk: 8
+    storage: storage
+    unprivileged: no
+    description: Container with Ansible
+    ostemplate: 'local:vztmpl/debian-10-standard_10.7-1_amd64.tar.gz'
+    onboot: no
+    netif: '{"net0":"name=eth0,gw=192.168.0.1,ip=192.168.0.2/24,bridge=vmbr0"}'
+    features:
+        - nesting=1

@@ -1,0 +1,2 @@
+[proxmox]
+my_ip ansible_port=my_port ansible_user=my_user ansible_password=my_passwd
