@@ -40,3 +40,5 @@ ansible-playbook -i hosts delete_cts.yml
 Attention: Keep in mind, if a machine takes longer to shut down, it may not be stopped/removed correctly. Log in the proxmox server and stop/delete the machines manually. On deletion, choose "purge" tick box.
 
 By default, update of the machine does not work for following parameters "net, virtio, ide, sata, scsi" (see https://docs.ansible.com/ansible/latest/collections/community/general/proxmox_module.html, update parameter). If you still want do to it, edit  ~/.ansible/collections/ansible_collections/community/general/plugins/modules/proxmox.py on your own risk.
+
+Based on https://gitlab.com/todorpetkov/ansible-proxmox/ work
