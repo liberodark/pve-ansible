@@ -4,9 +4,17 @@ Ansible playbook for VM deployment.
 
 In order to run these playbooks, you need at least ansible 2.9.10. Additional you need to install community.general collection and proxmoxer pip module. You can do it with the following commands (run them as the user who will run ansible, because these modules are installed for your user, not globally)
 
+Install this on your PC :
+
 ```
 ansible-galaxy collection install community.general
 pip install proxmoxer
+```
+
+Install this on PVE if you use SSH :
+
+```
+apt install python3-proxmoxer
 ```
 
 Edit config.yml and set password for the proxmox user.
