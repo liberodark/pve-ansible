@@ -11,8 +11,9 @@ cts:
     unprivileged: no
     description: Container with Ansible
     ostemplate: 'local:vztmpl/debian-10-standard_10.7-1_amd64.tar.gz'
+    hookscript: 'local:snippets/ct_hook.sh'
     onboot: no
-    netif: '{"net0":"name=eth0,gw=192.168.0.1,ip=192.168.0.2/24,bridge=vmbr0"}'
+    netif: '{"net0":"name=eth0,gw=192.168.0.1,ip=192.168.0.2/24,bridge=vmbr0,tag=100"}'
     features:
          - nesting=1
   slave:
@@ -27,7 +28,8 @@ cts:
     unprivileged: no
     description: Container with Ansible
     ostemplate: 'local:vztmpl/debian-10-standard_10.7-1_amd64.tar.gz'
+    hookscript: 'local:snippets/ct_hook.sh'
     onboot: no
-    netif: '{"net0":"name=eth0,gw=192.168.0.1,ip=192.168.0.2/24,bridge=vmbr0"}'
+    netif: '{"net0":"name=eth0,gw=192.168.0.1,ip=192.168.0.2/24,bridge=vmbr0,tag=101"}'
     features:
         - nesting=1
